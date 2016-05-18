@@ -69,44 +69,49 @@ y = as.factor(y)
 Impt = rfImpute(X, y)
 
 Impt$Embarked = factor(Impt$Embarked)
+Impt$y = as.integer(Impt$y) - 1
 
 require(missForest)
 test.Impt = missForest(test)
 test.Impt = test.Impt$ximp
-
+ 
 # ============================================================================
 #### XGBoost
 require(xgboost)
 require(Ckmeans.1d.dp)
 
-Impt$y = as.integer(Impt$y)
-Impt$y = Impt$y - 1
 Impt_xgb = xgb.DMatrix(data = data.matrix(Impt[,-1]), label = Impt$y)
 
 ## grid search depth
 depthGrid = seq(1, 10, 1)
-for (depth in depthGrid) {
-  print("=====================================================")
-  cat("depth: ", depth, "\n")
-  xgb.cv(data = Impt_xgb, max.depth = depth, eta = 0.01, nthread = 2, 
-         nround = 10, objective = "binary:logistic", 
-         early.stop.round = 3, maximize = FALSE, nfold = 5)
+roundGrid = seq(1, 10, 1)
+
+for (round in roundGrid) {
+  for (depth in depthGrid) {
+    print("=====================================================")
+    cat("depth: ", depth, "round: ", round, "\n")
+    xgb.cv(data = Impt_xgb, max.depth = depth, eta = 0.01, nthread = 2, 
+           nround = round, objective = "binary:logistic", 
+           early.stop.round = 3, maximize = FALSE, nfold = 5)
+  }
 }
+
 # depth = 8
 
 bst <- xgboost(data = Impt_xgb, max.depth = 8, eta = 0.01, nthread = 2, 
-               nround = 10, objective = "binary:logistic", 
+               nround = 2, objective = "binary:logistic", 
                early.stop.round = 3, maximize = FALSE)
 
 xgb.plot.deepness(model = bst)
 importance_matrix <- xgb.importance(colnames(X), model = bst)
 xgb.plot.importance(importance_matrix)
 
+
 # ============================================================================
 # predict using the test set
-test.Impt = xgb.DMatrix(data = data.matrix(test.Impt))
+test.Impt_xbg = xgb.DMatrix(data = data.matrix(test.Impt))
 
-prediction <- predict(bst, test.Impt)
+prediction <- predict(bst, test.Impt_xbg)
 prediction = round(prediction)
 
 # Save the solution to a dataframe with two columns: PassengerId and Survived (prediction)

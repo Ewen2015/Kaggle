@@ -36,5 +36,11 @@ R packages used: ``xgboost``,  ``VIM``, ``mice``
 
 Kaggle score: 0.81340
 
+#### Forth Try
+
+I've tried generate new features, like interactions, logFare, ..., but helpless and even got worse results than my third try. 
+
+Just return to the third try, have no idea where to improve...
+
 
 

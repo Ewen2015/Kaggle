@@ -2,123 +2,101 @@ setwd("/Users/ewenwang/Dropbox/Data Science/Kaggle/Titanic")
 
 # ============================================================================
 ## load data
-data = read.csv("train.csv", header = T)
-test = read.csv("test.csv", header = T)
+train = read.csv("train_clean.csv", header = T)
+test = read.csv("test_clean.csv", header = T)
+full = read.csv("full_clean.csv", header = T)
 
-# ============================================================================
-#### preprocess data
-
-# Grab title from passenger names
-data$Title <- gsub('(.*, )|(\\..*)', '', data$Name)
-test$Title <- gsub('(.*, )|(\\..*)', '', test$Name)
-
-unique(data$Title)
-
-# Titles with very low cell counts to be combined to "rare" level
-rare_title <- c('Dona', 'Lady', 'the Countess','Capt', 'Col', 'Don', 
-                'Dr', 'Major', 'Rev', 'Sir', 'Jonkheer')
-
-# Also reassign mlle, ms, and mme accordingly
-data$Title[data$Title == 'Mlle']        <- 'Miss' 
-data$Title[data$Title == 'Ms']          <- 'Miss'
-data$Title[data$Title == 'Mme']         <- 'Mrs' 
-data$Title[data$Title %in% rare_title]  <- 'Rare Title'
-
-test$Title[test$Title == 'Mlle']        <- 'Miss' 
-test$Title[test$Title == 'Ms']          <- 'Miss'
-test$Title[test$Title == 'Mme']         <- 'Mrs' 
-test$Title[test$Title %in% rare_title]  <- 'Rare Title'
-
-data$Title = factor(data$Title)
-test$Title = factor(test$Title)
-
-# Create a family size variable including the passenger themselves
-data$Fsize = data$SibSp + data$Parch + 1
-test$Fsize = test$SibSp + test$Parch + 1
-
-y = data$Survived
-X = data[,-c(1,2,4,9,11)]
-PassengerID = test[,1]
-test = test[,-c(1,3,8,10)]
-
-X$Embarked[which(X$Embarked == "")] = NA
-
-summary(y)
-
-summary(X)
-summary(test)
-
-# ============================================================================
-## missing data
-require(mice)
-md.pattern(X)
-md.pattern(test)
-
-require(VIM)
-aggr_plot <- aggr(X, col=c('navyblue','red'), numbers=TRUE, sortVars=TRUE, 
-                  labels=names(data), cex.axis=.7, gap=3, 
-                  ylab=c("Histogram of missing data","Pattern"))
-aggr_plot <- aggr(test, col=c('navyblue','red'), numbers=TRUE, sortVars=TRUE, 
-                  labels=names(data), cex.axis=.7, gap=3, 
-                  ylab=c("Histogram of missing data","Pattern"))
-
-# imputation
-require(randomForest)
-
-y = as.factor(y)
-Impt = rfImpute(X, y)
-
-Impt$Embarked = factor(Impt$Embarked)
-Impt$y = as.integer(Impt$y) - 1
-
-require(missForest)
-test.Impt = missForest(test)
-test.Impt = test.Impt$ximp
- 
 # ============================================================================
 #### XGBoost
 require(xgboost)
 require(Ckmeans.1d.dp)
 
-Impt_xgb = xgb.DMatrix(data = data.matrix(Impt[,-1]), label = Impt$y)
+data_xgb = xgb.DMatrix(data = data.matrix(train[,-1]), label = train$Survived)
 
 ## grid search depth
 depthGrid = seq(1, 10, 1)
 roundGrid = seq(1, 10, 1)
 
+set.seed(2016)
 for (round in roundGrid) {
   for (depth in depthGrid) {
     print("=====================================================")
-    cat("depth: ", depth, "round: ", round, "\n")
-    xgb.cv(data = Impt_xgb, max.depth = depth, eta = 0.01, nthread = 2, 
+    cat("round: ", round, "depth: ", depth, "\n")
+    xgb.cv(data = data_xgb, max.depth = depth, eta = 0.01, nthread = 2, 
            nround = round, objective = "binary:logistic", 
            early.stop.round = 3, maximize = FALSE, nfold = 5)
   }
 }
 
-# depth = 8
+# depth = 8; round = 5
 
 bst <- xgboost(data = Impt_xgb, max.depth = 8, eta = 0.01, nthread = 2, 
                nround = 2, objective = "binary:logistic", 
                early.stop.round = 3, maximize = FALSE)
 
 xgb.plot.deepness(model = bst)
-importance_matrix <- xgb.importance(colnames(X), model = bst)
+importance_matrix <- xgb.importance(colnames(train[,-1]), model = bst)
+xgb.plot.importance(importance_matrix)
+
+# ============================================================================
+#### feature selection
+
+# remain features: Sex, Pclass, Fare, Surname, SibSp, Title
+remain_var = c("Sex", "Pclass", "Fare", "Surname", "SibSp", "Title")
+
+full_fc = data.frame()
+full_fc <- full[,remain_var]
+
+train_fc <- full_fc[1:891,]
+test_fc <- full_fc[892:1309,]
+
+
+# ============================================================================
+#### refit the model
+
+data_xgb_fc = xgb.DMatrix(data = data.matrix(train_fc), label = train$Survived)
+
+## grid search depth
+depthGrid = seq(1, 10, 1)
+roundGrid = seq(1, 10, 1)
+
+set.seed(2016)
+for (round in roundGrid) {
+  for (depth in depthGrid) {
+    print("=====================================================")
+    cat("round: ", round, "depth: ", depth, "\n")
+    xgb.cv(data = data_xgb_fc, max.depth = depth, eta = 0.01, nthread = 2, 
+           nround = round, objective = "binary:logistic", 
+           early.stop.round = 3, maximize = FALSE, nfold = 5)
+  }
+}
+
+# depth = 7; round = 2
+
+bst_fc <- xgboost(data = data_xgb_fc, max.depth = 7, eta = 0.01, nthread = 2, 
+                  nround = 5, objective = "binary:logistic", 
+                  early.stop.round = 3, maximize = FALSE)
+
+xgb.plot.deepness(model = bst_fc)
+importance_matrix <- xgb.importance(colnames(train_fc), model = bst_fc)
 xgb.plot.importance(importance_matrix)
 
 
 # ============================================================================
 # predict using the test set
-test.Impt_xbg = xgb.DMatrix(data = data.matrix(test.Impt))
+data_xbg_test = xgb.DMatrix(data = data.matrix(test_fc))
 
-prediction <- predict(bst, test.Impt_xbg)
+prediction <- predict(bst_fc, data_xbg_test)
 prediction = round(prediction)
+
+test.orig = read.csv("test.csv", header = T)
+PassengerID = test.orig$PassengerId
 
 # Save the solution to a dataframe with two columns: PassengerId and Survived (prediction)
 submission <- data.frame(PassengerID, Survived = prediction)
 
 # Write the solution to file
-write.csv(submission, file = 'Submission2_Ewen.csv', row.names = F)
+write.csv(submission, file = 'Submission3_Ewen.csv', row.names = F)
 
 
 

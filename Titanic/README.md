@@ -23,3 +23,18 @@ Imputation: on train and test
 R packages used: ``xgboost``, ``randomForest``, ``missForest``, ``VIM``, ``mice``
 
 Kaggle score: 0.78947
+
+#### Third Try
+
+Feature engineering and feature selection. 
+
+Predictors used: ``Sex``, ``Pclass``, ``Fare``, ``Surname``, ``SibSp``, ``Title``
+
+Method used: Boosting Tree (depth = 7, round = 2)
+
+R packages used: ``xgboost``,  ``VIM``, ``mice``
+
+Kaggle score: 0.81340
+
+
+

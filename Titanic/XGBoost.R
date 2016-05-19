@@ -27,9 +27,9 @@ for (round in roundGrid) {
   }
 }
 
-# depth = 8; round = 5
+# depth = 7; round = 2
 
-bst <- xgboost(data = Impt_xgb, max.depth = 8, eta = 0.01, nthread = 2, 
+bst <- xgboost(data = Impt_xgb, max.depth = 7, eta = 0.01, nthread = 2, 
                nround = 2, objective = "binary:logistic", 
                early.stop.round = 3, maximize = FALSE)
 
@@ -41,10 +41,10 @@ xgb.plot.importance(importance_matrix)
 #### feature selection
 
 # remain features: Sex, Pclass, Fare, Surname, SibSp, Title
-remain_var = c("Sex", "Pclass", "Fare", "Surname", "SibSp", "Title")
+remain_vars = c("Sex", "Pclass", "Fare", "Surname", "SibSp", "Title")
 
 full_fc = data.frame()
-full_fc <- full[,remain_var]
+full_fc <- full[,remain_vars]
 
 train_fc <- full_fc[1:891,]
 test_fc <- full_fc[892:1309,]
@@ -70,7 +70,7 @@ for (round in roundGrid) {
   }
 }
 
-# depth = 7; round = 2
+# depth = 7; round = 5
 
 bst_fc <- xgboost(data = data_xgb_fc, max.depth = 7, eta = 0.01, nthread = 2, 
                   nround = 5, objective = "binary:logistic", 
@@ -95,7 +95,7 @@ PassengerID = test.orig$PassengerId
 submission <- data.frame(PassengerID, Survived = prediction)
 
 # Write the solution to file
-write.csv(submission, file = 'Submission3_Ewen.csv', row.names = F)
+write.csv(submission, file = 'Submission4_Ewen.csv', row.names = F)
 
 
 

@@ -3,7 +3,6 @@ setwd("/Users/ewenwang/Dropbox/Data Science/Kaggle/Titanic")
 # ============================================================================
 ## load data
 train = read.csv("train_clean.csv", header = T)
-test = read.csv("test_clean.csv", header = T)
 full = read.csv("full_clean.csv", header = T)
 
 # ============================================================================

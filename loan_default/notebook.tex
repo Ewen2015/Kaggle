@@ -1,0 +1,836 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Machine Learning with Python\_Hands-On Practice in Business Scenario}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Table of Contents{}
+
+{Machine Learning with Python: Hands-On Practice in Business Scenario}
+
+{Loan Default Prediction (LDP) Competition Introduction}
+
+{Data Description}
+
+{Results Evaluation}
+
+{Assignment}
+
+{Task 1: Exploratory data analysis}
+
+{Task 2: Classification w/o feature engineering}
+
+{Task 3: Classification w/ feature engineering}
+
+{Task 4: Classification plus regression and submit the results to the
+forum}
+
+{Review}
+
+    \hypertarget{machine-learning-with-python-hands-on-practice-in-business-scenario}{%
+\section{Machine Learning with Python: Hands-On Practice in Business
+Scenario}\label{machine-learning-with-python-hands-on-practice-in-business-scenario}}
+
+\textbf{Wang, En Qun EwenWangSH@cn.ibm.com}
+
+\hypertarget{loan-default-prediction-ldp-competition-introduction}{%
+\subsection{Loan Default Prediction (LDP) Competition
+Introduction}\label{loan-default-prediction-ldp-competition-introduction}}
+
+This competition asks you to determine whether a loan will default, as
+well as the loss incurred if it does default. Unlike traditional
+finance-based approaches to this problem, where one distinguishes
+between good or bad counterparties in a binary way, we seek to
+anticipate and incorporate both the default and the severity of the
+losses that result. In doing so, we are building a bridge between
+traditional banking, where we are looking at reducing the consumption of
+economic capital, to an asset-management perspective, where we optimize
+on the risk to the financial investor.
+
+This competition is sponsored by researchers at Imperial College London.
+
+\begin{figure}
+\centering
+\includegraphics{https://kaggle2.blob.core.windows.net/competitions/kaggle/3756/media/icl_logo.gif}
+\caption{image}
+\end{figure}
+
+\hypertarget{data-description}{%
+\subsection{Data Description}\label{data-description}}
+
+This data corresponds to a set of financial transactions associated with
+individuals. The data has been standardized, detrended, and anonymized.
+You are provided with over two hundred thousand observations and nearly
+800 features. Each observation is independent from the previous.
+
+For each observation, it was recorded whether a default was triggered.
+In case of a default, the loss was measured. This quantity lies between
+0 and 100. It has been normalized, considering that the notional of each
+transaction at inception is 100. For example, a loss of 60 means that
+only 40 is reimbursed. If the loan did not default, the loss was 0. You
+are asked to predict the losses for each observation in the test set.
+
+Missing feature values have been kept as is, so that the competing teams
+can really use the maximum data available, implementing a strategy to
+fill the gaps if desired. Note that some variables may be categorical
+(e.g. \(f776\) and \(f777\)).
+
+The competition sponsor has worked to remove time-dimensionality from
+the data. However, the observations are still listed in order from old
+to new in the training set. In the test set they are in random order.
+
+\textbf{Notes:}
+
+Please go to
+\href{https://www.kaggle.com/c/loan-default-prediction/data}{Kaggle} and
+download the training and test data. Or you may contact training
+instructor to get the data, as we have uploaded all data to
+\href{https://ibm.box.com/s/obp4r1k35tsqggmea04kvo02xpay6tjq}{Box}.
+
+\hypertarget{results-evaluation}{%
+\subsection{Results Evaluation}\label{results-evaluation}}
+
+This competition is evaluated on the mean absolute error (MAE):
+
+\[MAE = \frac{1}{n} \sum_{i=1}^{n}{|y_i - \hat{y_i}|}\]
+
+where
+
+\(n\) is the number of rows
+
+\(\hat{y_i}\) is the predicted loss
+
+\(y_i\) is the actual loss
+
+\hypertarget{assignment}{%
+\subsection{Assignment}\label{assignment}}
+
+A two-step-process to predict the loss is an intuitive solution to this
+competition: \textbf{classification to predict the defaulter} and
+\textbf{regression to predict the loss} (\(log(loss+1)\) to be correct).
+
+In this hands-on practice, we will divide the competition into four
+tasks as following:
+
+\begin{itemize}
+\tightlist
+\item
+  Task 1: Exploratory data analysis.
+\item
+  Task 2: Classification w/o feature engineering.
+\item
+  Task 3: Classification w/ feature engineering.
+\item
+  Task 4: Classification plus regression and submit the results to the
+  forum.
+\end{itemize}
+
+You may complete \textbf{Task 0} and \textbf{Task 1} during the training
+and the rest two tasks after the class.
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{task-1-exploratory-data-analysis}{%
+\subsection{Task 1: Exploratory data
+analysis}\label{task-1-exploratory-data-analysis}}
+
+Exploratory data analysis (EDA) is an approach to analyzing data sets to
+summarize their main characteristics, often with visual methods. ``EDA''
+is a critical first step in analyzing the data from an experiment. Here
+are the main reasons we use EDA:
+
+\begin{itemize}
+\tightlist
+\item
+  detection of mistakes
+\item
+  checking of assumptions
+\item
+  preliminary selection of appropriate models
+\item
+  determining relationships among the explanatory variables, and
+\item
+  assessing the direction and rough size of relationships between
+  explanatory and outcome variables.
+\end{itemize}
+
+Loosely speaking, any method of looking at data that does not include
+formal statistical modeling and inference falls under the term
+exploratory data analysis.
+
+As the data in this competition is standardized, detrended, and
+anonymized, one actually has less to do for EDA compared to a generally
+machine learning project. However, you can still dig much information
+from given data.
+
+\textbf{Hint:}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Try to find duplicated columns from the data. It can be a heavy job
+  for your computer to compare each row to find duplicated columns. Try
+  100 first and them 1000, 5000, you name it.
+\item
+  Try to find highly correlated column pairs and see if it necessary to
+  keep them both in the data. Or you may get their difference to check
+  your plan.
+\item
+  Graphs help.
+\end{enumerate}
+
+\textbf{Task: Do as much as possible EDA w/ training data.}
+
+\textbf{Requirement: Please provide rational EDA w/ descriptions. Never
+drop a chart or graph w/o any explanation!}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{wd} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/Users/ewenwang/Documents/practice\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}  \PY{c+c1}{\PYZsh{} use your work directory}
+        \PY{n}{file\PYZus{}train} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}default.csv}\PY{l+s+s1}{\PYZsq{}}                 \PY{c+c1}{\PYZsh{} use your training set file name}
+        \PY{n}{os}\PY{o}{.}\PY{n}{chdir}\PY{p}{(}\PY{n}{wd}\PY{p}{)}
+        
+        \PY{n}{train} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{file\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{train}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}                       \PY{c+c1}{\PYZsh{} get the information of the training set}
+        \PY{n}{train}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}                       \PY{c+c1}{\PYZsh{} take a look at the training set}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 105471 entries, 0 to 105470
+Columns: 771 entries, id to loss
+dtypes: float64(653), int64(99), object(19)
+memory usage: 620.4+ MB
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}    id   f1  f2        f3    f4  f5     f6      f7      f8      f9  {\ldots}   f770  \textbackslash{}
+        0   1  126  10  0.686842  1100   3  13699  7201.0  4949.0  126.75  {\ldots}      5   
+        1   2  121  10  0.782776  1100   3  84645   240.0  1625.0  123.52  {\ldots}      6   
+        2   3  126  10  0.500080  1100   3  83607  1800.0  1527.0  127.76  {\ldots}     13   
+        3   4  134  10  0.439874  1100   3  82642  7542.0  1730.0  132.94  {\ldots}      4   
+        4   5  109   9  0.502749  2900   4  79124    89.0   491.0  122.72  {\ldots}     26   
+        
+           f771  f772  f773    f774    f775  f776  f777  f778  loss  
+        0  2.14 -1.54  1.18  0.1833  0.7873     1     0     5     0  
+        1  0.54 -0.24  0.13  0.1926 -0.6787     1     0     5     0  
+        2  2.89 -1.73  1.04  0.2521  0.7258     1     0     5     0  
+        3  1.29 -0.89  0.66  0.2498  0.7119     1     0     5     0  
+        4  6.11 -3.82  2.51  0.2282 -0.5399     0     0     5     0  
+        
+        [5 rows x 771 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{train}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}                   id             f1             f2             f3  \textbackslash{}
+        count  105471.000000  105471.000000  105471.000000  105471.000000   
+        mean    52736.000000     134.603171       8.246883       0.499066   
+        std     30446.999458      14.725467       1.691535       0.288752   
+        min         1.000000     103.000000       1.000000       0.000006   
+        25\%     26368.500000     124.000000       8.000000       0.248950   
+        50\%     52736.000000     129.000000       9.000000       0.498267   
+        75\%     79103.500000     148.000000       9.000000       0.749494   
+        max    105471.000000     176.000000      11.000000       0.999994   
+        
+                          f4             f5             f6             f7  \textbackslash{}
+        count  105471.000000  105471.000000  105471.000000  105289.000000   
+        mean     2678.488874       7.354533   47993.704317    2974.336018   
+        std      1401.010943       5.151112   35677.136048    2546.551085   
+        min      1100.000000       1.000000       0.000000       1.000000   
+        25\%      1500.000000       4.000000   11255.000000     629.000000   
+        50\%      2200.000000       4.000000   76530.000000    2292.000000   
+        75\%      3700.000000      10.000000   80135.000000    4679.000000   
+        max      7900.000000      17.000000   88565.000000    9968.000000   
+        
+                          f8             f9      {\ldots}                 f770  \textbackslash{}
+        count  105370.000000  105471.000000      {\ldots}        105471.000000   
+        mean     2436.363718     134.555225      {\ldots}            17.422543   
+        std      2262.950221      13.824682      {\ldots}            18.548936   
+        min         1.000000     106.820000      {\ldots}             2.000000   
+        25\%       746.000000     124.290000      {\ldots}             5.000000   
+        50\%      1786.000000     128.460000      {\ldots}            11.000000   
+        75\%      3411.000000     149.080000      {\ldots}            23.000000   
+        max     11541.000000     172.950000      {\ldots}           168.000000   
+        
+                        f771           f772           f773           f774  \textbackslash{}
+        count  105471.000000  105471.000000  105471.000000  104407.000000   
+        mean        5.800976      -4.246788       3.273059       0.233852   
+        std         6.508555       4.828265       3.766746       0.073578   
+        min         0.000000     -43.160000       0.000000       0.000000   
+        25\%         1.480000      -5.700000       0.740000       0.198400   
+        50\%         3.570000      -2.600000       1.990000       0.251800   
+        75\%         7.700000      -1.010000       4.440000       0.283600   
+        max        58.120000       0.000000      34.040000       0.473700   
+        
+                        f775           f776           f777           f778  \textbackslash{}
+        count  103946.000000  105471.000000  105471.000000  105471.000000   
+        mean        0.014797       0.310246       0.322847     175.951589   
+        std         1.039439       0.462597       0.467567     298.294043   
+        min       -18.439600       0.000000       0.000000       2.000000   
+        25\%        -0.704275       0.000000       0.000000      19.000000   
+        50\%         0.375400       0.000000       0.000000      40.000000   
+        75\%         0.737100       1.000000       1.000000     104.000000   
+        max        11.092000       1.000000       1.000000    1212.000000   
+        
+                        loss  
+        count  105471.000000  
+        mean        0.799585  
+        std         4.321120  
+        min         0.000000  
+        25\%         0.000000  
+        50\%         0.000000  
+        75\%         0.000000  
+        max       100.000000  
+        
+        [8 rows x 752 columns]
+\end{Verbatim}
+            
+    \textbf{Hint:}
+
+\texttt{pandas\_profiling} generates profile reports from a
+\texttt{pandas} DataFrame. The \texttt{df.describe()} function is great
+but a little basic for serious exploratory data analysis.
+
+For each column the following statistics - if relevant for the column
+type - are presented in an interactive HTML report:
+
+\begin{itemize}
+\tightlist
+\item
+  Essentials: type, unique values, missing values
+\item
+  Quantile statistics like minimum value, Q1, median, Q3, maximum,
+  range, interquartile range
+\item
+  Descriptive statistics like mean, mode, standard deviation, sum,
+  median absolute deviation, coefficient of variation, kurtosis,
+  skewness
+\item
+  Most frequent values
+\item
+  Histogram
+\end{itemize}
+
+Go to \href{https://github.com/JosPolfliet/pandas-profiling}{Github} to
+find more information about \texttt{pandas\_profiling}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{import} \PY{n+nn}{pandas\PYZus{}profiling} \PY{k}{as} \PY{n+nn}{pp}
+        
+        \PY{c+c1}{\PYZsh{} pp.ProfileReport(train)}
+\end{Verbatim}
+
+
+    Now, it's your turn!
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \hypertarget{task-2-classification-wo-feature-engineering}{%
+\subsection{Task 2: Classification w/o feature
+engineering}\label{task-2-classification-wo-feature-engineering}}
+
+We will explore classification algorithms you have learn in the morning.
+
+\textbf{Task: Try any classification algorithm you would like to and
+evaluate them with AUC score.}
+
+\textbf{Requirement: Start from simple statistical models like logistic
+regression first, and then dive deeper with algorithms like SVM,
+bagging, boosting, or even artificial neural network.}
+
+\textbf{Notes:} 1. Most common-used algorithms can be found in the
+package \texttt{sklearn}. 2. If you already familiar with the normal
+machine learning algorithms, please try some more efficient algorithm
+libraries like \texttt{xgboost} and \texttt{lightgbm}. 3. All algorithms
+mentioned above are just a single model or a single algorithm with
+ensemble models; to go further in machine learning algorithm, please try
+some more complicated technique like \textbf{stacking}.
+
+Training set and validation set are prepared as following:
+
+\textbf{Help:}
+
+If you are confused with the difference among training set, test set,
+and validation set, please go to
+\href{https://en.wikipedia.org/wiki/Training,_test,_and_validation_sets}{Wikipedia}
+for more information or just ask our training instructors.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} generate target variable for the classification task}
+        \PY{n}{default} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{default}\PY{p}{[}\PY{n}{default}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{default}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{default}
+        
+        \PY{n}{target} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{default}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{features} \PY{o}{=} \PY{p}{[}\PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{train}\PY{o}{.}\PY{n}{columns} \PY{k}{if} \PY{n}{x} \PY{o+ow}{not} \PY{o+ow}{in} \PY{p}{[}\PY{n}{target}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} split the data into training set and valid set}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        
+        \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{2018}
+        \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.3}
+        
+        \PY{n}{dtrain}\PY{p}{,} \PY{n}{dvalid} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{n}{test\PYZus{}size}\PY{p}{,} \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{n}{seed}\PY{p}{)}
+\end{Verbatim}
+
+
+    Try your algorithms and fit your models on \texttt{train} and predict on
+\texttt{valid}.
+
+\textbf{Hint:} The following is a simple logistic regression model with
+the golden feature.
+
+\textbf{Note:} The golden feature is generated from feature engineering,
+which will be covered in the next task.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{metrics}
+        
+        \PY{n}{golden\PYZus{}feature} \PY{o}{=} \PY{n}{dtrain}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f274}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{dtrain}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f528}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}               \PY{c+c1}{\PYZsh{} generated from feature engineering}
+        \PY{n}{golden\PYZus{}feature} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{golden\PYZus{}feature}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{golden\PYZus{}feature}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{lr} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}
+        \PY{n}{lr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{golden\PYZus{}feature}\PY{p}{,} \PY{n}{dtrain}\PY{p}{[}\PY{n}{target}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{train\PYZus{}prob} \PY{o}{=} \PY{n}{lr}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{golden\PYZus{}feature}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}            \PY{c+c1}{\PYZsh{} predict on training set}
+        \PY{n}{train\PYZus{}auc} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{(}\PY{n}{dtrain}\PY{p}{[}\PY{n}{target}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}prob}\PY{p}{)}  \PY{c+c1}{\PYZsh{} calculate training auc }
+        
+        \PY{n}{valid\PYZus{}gf} \PY{o}{=} \PY{n}{dvalid}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f274}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{dvalid}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f528}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}             
+        \PY{n}{valid\PYZus{}gf} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{valid\PYZus{}gf}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{valid\PYZus{}gf}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{valid\PYZus{}prob} \PY{o}{=} \PY{n}{lr}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{valid\PYZus{}gf}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}                  \PY{c+c1}{\PYZsh{} predict on validation set}
+        \PY{n}{valid\PYZus{}auc} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{(}\PY{n}{dvalid}\PY{p}{[}\PY{n}{target}\PY{p}{]}\PY{p}{,} \PY{n}{valid\PYZus{}prob}\PY{p}{)}  \PY{c+c1}{\PYZsh{} calculate validation auc }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Model Report:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AUC\PYZus{}Train: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{train\PYZus{}auc}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AUC\PYZus{}Valid: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{valid\PYZus{}auc}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model Report:
+AUC\_Train:  0.936762776912
+AUC\_Valid:  0.939375926472
+
+    \end{Verbatim}
+
+    The above practice with logistic regression and golden feature already
+achieves a pretty good result, which largely thanks to the feature
+engineering. Please feel free to use the golden feature above and
+explore more machine learning algorithms.
+
+Now, it's your turn!
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{task-3-classification-w-feature-engineering}{%
+\subsection{Task 3: Classification w/ feature
+engineering}\label{task-3-classification-w-feature-engineering}}
+
+You may already benefit the feature engineering from the golden feature
+in the task above. We will do more feature engineering task in this
+section.
+
+Feature engineering is the process of using domain knowledge of the data
+to create features that make machine learning algorithms work. Feature
+engineering is fundamental to the application of machine learning, and
+is both difficult and expensive. The need for manual feature engineering
+can be obviated by automated feature learning.
+
+Feature engineering is an informal topic, but it is considered essential
+in applied machine learning.
+
+\textbf{Task:}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Summary the data types in the dataset. You may need some EDA to
+  explore it. Please refer to the EDA task.
+\item
+  Try to find possible ways to transform raw data into the one that
+  machine learning algorithms can handle with.
+\item
+  Generate reasonable features with your expert knowledge and possible
+  techniques. Illustrate why you do so.
+\item
+  Rebuild your classification models with data after the feature
+  engineering.
+\end{enumerate}
+
+\textbf{Requirement: Please provide rational FE w/ descriptions. Do
+everything w/ a reason and necessary explanation!}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{task-4-classification-plus-regression-and-submit-the-results-to-the-forum}{%
+\subsection{Task 4: Classification plus regression and submit the
+results to the
+forum}\label{task-4-classification-plus-regression-and-submit-the-results-to-the-forum}}
+
+So far you have completed the most difficult part of this competition --
+classification, your next task is to do regression with defaulters
+generated from classification.
+
+The linear regression is one of the most classical topic in statistics.
+If you would like to learn more about linear regression, please check it
+on \href{https://en.wikipedia.org/wiki/Linear_regression}{Wikipedia}.
+
+Now, it's your turn!
+
+    When all of above are done, it's time to submit your result to the
+\href{https://www.kaggle.com/c/loan-default-prediction}{Kaggle}.
+
+    \hypertarget{review}{%
+\subsection{Review}\label{review}}
+
+In this hands-on practice, we introduced the most popular data science
+competition forum Kaggle and employed Loan Default Prediction to get a
+glimpse at the machine learning with Python. Topics we covered:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Exploratory Data Analysis
+\item
+  Feature Engineering
+\item
+  Machine Learning Application: Classification and Regression
+\end{enumerate}
+
+Hopefully this can be a good start for your journey of machine learning.
+All of above topics can be a training project itself, feel free to
+Google more information and go to Kaggle to learn from Kagglers. As you
+go further, you will find much more topics that are of great importance
+to machine learning, like
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  hyper parameter tuning
+\item
+  artificial neural network
+\item
+  deep learning
+\item
+  stacking
+\end{enumerate}
+
+and more.
+
+Machine learning is so popular nowadays, while it can only be much more
+well-known in the future. As it's still developing, new directions and
+new techniques appear each day, which means there is never a complete
+guide to it but learn as you go and learn as you need.
+
+Enjoy your journey of machine learning, along with Python, Google, and
+Kaggle.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

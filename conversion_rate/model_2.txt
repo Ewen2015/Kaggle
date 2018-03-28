@@ -1,0 +1,191 @@
+tree
+version=v2
+num_class=1
+num_tree_per_iteration=1
+label_index=0
+max_feature_idx=117
+objective=binary sigmoid:1
+feature_names=item_price_level item_sales_level item_collected_level item_pv_level user_age_level user_star_level shop_review_num_level shop_review_positive_rate shop_star_level shop_score_service shop_score_delivery shop_score_description week hour user_query_day user_query_day_hour item_id_count_x item_id_count_y item_id_trade_count item_id_cvr item_id_count_change item_id_count_change_pct item_brand_id_count_x item_brand_id_count_y item_brand_id_trade_count item_brand_id_cvr item_brand_id_count_change item_brand_id_count_change_pct item_city_id_count_x item_city_id_count_y item_city_id_trade_count item_city_id_cvr item_city_id_count_change item_city_id_count_change_pct user_id_count_x user_id_count_y user_id_trade_count user_id_cvr user_id_count_change user_id_count_change_pct user_gender_id_count_x user_gender_id_count_y user_gender_id_trade_count user_gender_id_cvr user_gender_id_count_change user_gender_id_count_change_pct user_occupation_id_count_x user_occupation_id_count_y user_occupation_id_trade_count user_occupation_id_cvr user_occupation_id_count_change user_occupation_id_count_change_pct context_id_count_x context_id_count_y context_id_trade_count context_id_cvr context_id_count_change context_id_count_change_pct context_page_id_count_x context_page_id_count_y context_page_id_trade_count context_page_id_cvr context_page_id_count_change context_page_id_count_change_pct shop_id_count_x shop_id_count_y shop_id_trade_count shop_id_cvr shop_id_count_change shop_id_count_change_pct category_1_count_x category_1_count_y category_1_trade_count category_1_cvr category_1_count_change category_1_count_change_pct category_2_count_x category_2_count_y category_2_trade_count category_2_cvr category_2_count_change category_2_count_change_pct property_0_count_x property_0_count_y property_0_trade_count property_0_cvr property_0_count_change property_0_count_change_pct property_1_count_x property_1_count_y property_1_trade_count property_1_cvr property_1_count_change property_1_count_change_pct property_2_count_x property_2_count_y property_2_trade_count property_2_cvr property_2_count_change property_2_count_change_pct predict_category_0_count_x predict_category_0_count_y predict_category_0_trade_count predict_category_0_cvr predict_category_0_count_change predict_category_0_count_change_pct predict_category_1_count_x predict_category_1_count_y predict_category_1_trade_count predict_category_1_cvr predict_category_1_count_change predict_category_1_count_change_pct predict_category_2_count_x predict_category_2_count_y predict_category_2_trade_count predict_category_2_cvr predict_category_2_count_change predict_category_2_count_change_pct
+feature_infos=[0:11] [-1:17] [0:17] [0:21] [-1:1007] [-1:3010] [0:25] [-1:1] [4999:5020] [-1:1] [-1:1] [-1:1] [1:6] [0:23] [1:40] [1:26] [1:3001] [1:2724] [1:100] [0.0014619883040935672:1] [0:333] [0:9] [1:69746] [1:61396] [1:1364] [0.0016920473773265651:1] [0:8350] [0:3.5] [1:154991] [1:136066] [1:1817] [0.0042283298097251587:0.5] [0:18925] [0:3] [1:65] [1:65] [1:4] [0.027027027027027029:1] [0:32] [0:18] [10349:360817] [9059:317613] [148:5958] [0.012929151742814711:0.021332235647352236] [1290:43204] [0.12710753909321221:0.14239982338006402] [964:300036] [874:263890] [11:4901] [0.012585812356979404:0.020650402736912016] [90:36146] [0.10297482837528604:0.14624867571992681] [1:3] [1:3] [1:3] [1:1] none none [1940:267486] [1685:235414] [21:4651] [0.010584677419354838:0.021638611803823773] [255:32072] [0.13004032258064516:0.1513353115727003] [1:11278] [1:9875] [1:237] [0.00088731144631765753:1] [0:1403] [0:4] [88:150779] [82:132524] [1:1957] [0.012195121951219513:0.059853190287972896] [6:18255] [0.073170731707317069:0.20779220779220781] [123:476109] [112:418946] [5:7944] [0.018961870980985618:0.060880048221820374] [11:57163] [0.098214285714285712:0.14888487040385776] [1:227270] [1:199589] [1:3822] [0.0019083969465648854:0.33333333333333331] [0:27681] [0:1] [1:209334] [1:183779] [1:3254] [0.0031104199066874028:0.33333333333333331] [0:25555] [0:4] [1:98990] [1:87320] [1:1732] [0.0015197568389057751:0.25] [0:11670] [0:1] [1:106334] [1:92965] [1:1792] [0.0019120458891013384:0.5] [0:13369] [0:1] [1:120323] [1:105709] [1:2030] [0.006993006993006993:0.33333333333333331] [0:14614] [0:3] [1:112972] [1:99353] [1:1928] [0.0069444444444444441:0.5] [0:13619] [0:2.5]
+tree_sizes=246 592 600 520 675 983 355 689 521 441
+
+Tree=0
+num_leaves=2
+num_cat=0
+split_feature=54
+split_gain=21715.5
+threshold=1.0000000180025095e-35
+decision_type=10
+left_child=-1
+right_child=-2
+leaf_value=-0.02 0.02
+leaf_count=280550 5536
+internal_value=0
+internal_count=286086
+shrinkage=0.01
+
+
+Tree=1
+num_leaves=6
+num_cat=0
+split_feature=54 0 0 9 3
+split_gain=21285.5 5.82077e-11 9.09495e-13 2.27374e-13 5.68434e-14
+threshold=1.0000000180025095e-35 9.5000000000000018 5.5000000000000009 0.97783913798259425 14.500000000000002
+decision_type=10 2 2 2 2
+left_child=1 -1 3 -2 -3
+right_child=2 4 -4 -5 -6
+leaf_value=-0.019801986678460028 0.019801986678460028 -0.019801986678460028 0.019801986678460028 0.019801986678460028 -0.019801986678460028
+leaf_count=280249 1074 23 4187 275 278
+internal_value=0 -1.9802 1.9802 1.9802 -1.9802
+internal_count=286086 280550 5536 1349 301
+shrinkage=0.01
+
+
+Tree=2
+num_leaves=6
+num_cat=0
+split_feature=54 1 0 7 11
+split_gain=20868.2 5.82077e-11 9.09495e-13 4.54747e-13 2.27374e-13
+threshold=1.0000000180025095e-35 4.5000000000000009 5.5000000000000009 0.99476182822814685 0.94957576857030368
+decision_type=10 2 2 2 2
+left_child=1 -1 4 -4 -2
+right_child=2 -3 3 -5 -6
+leaf_value=-0.019609797470843723 0.019609797470843723 -0.019609797470843723 0.019609797470843723 0.019609797470843723 0.019609797470843723
+leaf_count=4312 238 276238 1202 2985 1111
+internal_value=0 -1.96098 1.96098 1.96098 1.96098
+internal_count=286086 280550 5536 4187 1349
+shrinkage=0.01
+
+
+Tree=3
+num_leaves=5
+num_cat=0
+split_feature=54 0 11 5
+split_gain=20462.9 5.82077e-11 1.81899e-12 4.54747e-13
+threshold=1.0000000180025095e-35 8.5000000000000018 0.9567105124311811 3002.5000000000005
+decision_type=10 2 2 2
+left_child=1 -1 -2 -3
+right_child=2 3 -4 -5
+leaf_value=-0.019423185912296671 0.019423185912296671 -0.019423185912296671 0.019423185912296671 -0.019423185912296671
+leaf_count=277915 682 393 4854 2242
+internal_value=0 -1.94232 1.94232 -1.94232
+internal_count=286086 280550 5536 2635
+shrinkage=0.01
+
+
+Tree=4
+num_leaves=7
+num_cat=0
+split_feature=54 1 14 10 14 24
+split_gain=20069.3 2.91038e-11 2.91038e-11 9.09495e-13 1.13687e-13 7.10543e-15
+threshold=1.0000000180025095e-35 4.5000000000000009 24.500000000000004 0.9774117450415043 39.000000000000007 20.500000000000004
+decision_type=10 2 2 2 2 8
+left_child=1 -1 -3 -2 -4 -6
+right_child=3 2 4 -5 5 -7
+leaf_value=-0.01924192426848121 0.01924192426848121 -0.01924192426848121 -0.01924192426848121 0.01924192426848121 -0.019241924268481213 -0.019241924268481203
+leaf_count=4312 4808 275681 502 728 35 20
+internal_value=0 -1.92419 -1.92419 1.92419 -1.92419 -1.92419
+internal_count=286086 280550 276238 5536 557 55
+shrinkage=0.01
+
+
+Tree=5
+num_leaves=11
+num_cat=0
+split_feature=54 14 1 0 1 1 2 7 1 25
+split_gain=19519.5 5.82077e-11 9.09495e-13 5.68434e-14 5.68434e-14 1.42109e-14 1.42109e-14 1.42109e-14 7.10543e-15 7.10543e-15
+threshold=1.0000000180025095e-35 25.500000000000004 6.5000000000000009 7.5000000000000009 10.500000000000002 5.5000000000000009 10.500000000000002 0.99204324375002029 3.5000000000000004 0.026281254316894601
+decision_type=10 2 2 2 2 2 2 2 2 8
+left_child=1 -1 5 4 6 8 9 -7 -2 -3
+right_child=2 3 -4 -5 -6 7 -8 -9 -10 -11
+leaf_value=-0.019065791914708398 0.019065791914708405 -0.019065791914708387 0.019065791914708398 -0.019065791914708398 -0.019065791914708398 0.019065791914708391 -0.019065791914708398 0.019065791914708398 0.019065791914708394 -0.019065791914708398
+leaf_count=280125 21 49 5348 172 193 37 39 39 43 20
+internal_value=0 -1.90658 1.90658 -1.90658 -1.90658 1.90658 -1.90658 1.90658 1.90658 -1.90658
+internal_count=286086 280598 5488 473 301 140 108 76 64 69
+shrinkage=0.01
+
+
+Tree=6
+num_leaves=3
+num_cat=0
+split_feature=54 1
+split_gain=19150.8 9.09495e-13
+threshold=1.0000000180025095e-35 3.5000000000000004
+decision_type=10 2
+left_child=-1 -2
+right_child=1 -3
+leaf_value=-0.018894583072240557 0.018894583072240557 0.018894583072240557
+leaf_count=280598 21 5467
+internal_value=0 1.88946
+internal_count=286086 5488
+shrinkage=0.01
+
+
+Tree=7
+num_leaves=7
+num_cat=0
+split_feature=54 0 22 9 63 10
+split_gain=18792.4 2.91038e-11 2.91038e-11 3.63798e-12 1.81899e-12 1.13687e-13
+threshold=1.0000000180025095e-35 5.5000000000000009 768.00000000000011 0.96279569892473116 0.13603273223201873 0.97703965989167774
+decision_type=10 2 2 2 2 2
+left_child=1 3 -3 -1 5 -2
+right_child=4 2 -4 -5 -6 -7
+leaf_value=-0.018728101129627996 0.018728101129627996 -0.018728101129627996 -0.018728101129627996 -0.018728101129627996 0.018728101129627996 0.018728101129627996
+leaf_count=9507 608 80626 165202 25263 4774 106
+internal_value=0 -1.87281 -1.87281 -1.87281 1.87281 1.87281
+internal_count=286086 280598 245828 34770 5488 714
+shrinkage=0.01
+
+
+Tree=8
+num_leaves=5
+num_cat=0
+split_feature=54 67 0 1
+split_gain=18443.7 5.82077e-11 9.09495e-13 5.68434e-14
+threshold=1.0000000180025095e-35 0.0076263177026535808 4.5000000000000009 9.5000000000000018
+decision_type=10 10 2 2
+left_child=1 -1 3 -2
+right_child=2 -3 -4 -5
+leaf_value=-0.018566161656378741 0.018566161656378741 -0.018566161656378741 0.018566161656378741 0.018566161656378741
+leaf_count=72566 65 208032 4941 482
+internal_value=0 -1.85662 1.85662 1.85662
+internal_count=286086 280598 5488 547
+shrinkage=0.01
+
+
+Tree=9
+num_leaves=4
+num_cat=0
+split_feature=54 7 1
+split_gain=18104.4 2.91038e-11 9.09495e-13
+threshold=1.0000000180025095e-35 0.98995235599886333 9.5000000000000018
+decision_type=10 2 2
+left_child=1 -1 -2
+right_child=2 -3 -4
+leaf_value=-0.018408588220718791 0.018408588220718791 -0.018408588220718791 0.018408588220718791
+leaf_count=52436 826 228162 4662
+internal_value=0 -1.84086 1.84086
+internal_count=286086 280598 5488
+shrinkage=0.01
+
+
+
+feature importances:
+context_id_trade_count=10
+item_sales_level=9
+item_price_level=7
+shop_review_positive_rate=3
+user_query_day=3
+shop_score_service=2
+shop_score_delivery=2
+shop_score_description=2
+item_collected_level=1
+item_pv_level=1
+user_star_level=1
+item_brand_id_count_x=1
+item_brand_id_trade_count=1
+item_brand_id_cvr=1
+context_page_id_count_change_pct=1
+shop_id_cvr=1
+
+pandas_categorical:[]

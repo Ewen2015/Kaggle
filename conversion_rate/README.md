@@ -1,10 +1,23 @@
 ## LOG:
 
+Mar 25, 2018
 
+Hi Zilin and Bo,
+
+I have build a python module to simplify the data process as `Conversion.py`. 
+
+We roughly got three parts in this competion as following:
+
+1. Data: (1) data proccess, (2) exploratory data analysis, (3) feature engineering. 
+2. Algorithm: hyper parameter tuning.
+3. Improvement: stacking and more.
+
+
+---
 
 Mar 21, 2018
 
-Hi Zilin, 
+Hi Zilin,
 
 Please check out the following files, 
 

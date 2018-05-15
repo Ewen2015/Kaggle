@@ -1,0 +1,23 @@
+
+<class 'type'>
+%------------------------------------------------------------%
+0  baseline  0:
+0.084571	['shop_score_delivery', 'shop_score_description', 'shop_score_service']
+1  shop_review_positive_rate  0:
+0.084263	['shop_score_delivery', 'shop_score_description', 'shop_score_service', 'shop_review_positive_rate']
+1  shop_star_level  0:
+0.084096	['shop_score_delivery', 'shop_score_description', 'shop_score_service', 'shop_review_positive_rate', 'shop_star_level']
+reverse  shop_score_service  0:
+0.084064	['shop_score_delivery', 'shop_score_description', 'shop_review_positive_rate', 'shop_star_level']
+1  user_gender_id  0:
+0.084008	['shop_score_delivery', 'shop_score_description', 'shop_review_positive_rate', 'shop_star_level', 'user_gender_id']
+cross term  shop_score_delivery-shop_star_level  0:
+0.083874	['shop_score_delivery', 'shop_score_description', 'shop_review_positive_rate', 'shop_star_level', 'user_gender_id', 'shop_score_delivery-shop_star_level']
+cross term  shop_score_description-shop_review_positive_rate  0:
+0.083844	['shop_score_delivery', 'shop_score_description', 'shop_review_positive_rate', 'shop_star_level', 'user_gender_id', 'shop_score_delivery-shop_star_level', 'shop_score_description-shop_review_positive_rate']
+cross term  shop_score_description*shop_review_positive_rate  0:
+0.083747	['shop_score_delivery', 'shop_score_description', 'shop_review_positive_rate', 'shop_star_level', 'user_gender_id', 'shop_score_delivery-shop_star_level', 'shop_score_description-shop_review_positive_rate', 'shop_score_description*shop_review_positive_rate']
+cross term  shop_review_positive_rate+shop_star_level  0:
+0.083731	['shop_score_delivery', 'shop_score_description', 'shop_review_positive_rate', 'shop_star_level', 'user_gender_id', 'shop_score_delivery-shop_star_level', 'shop_score_description-shop_review_positive_rate', 'shop_score_description*shop_review_positive_rate', 'shop_review_positive_rate+shop_star_level']
+cross term  shop_review_positive_rate-shop_star_level  0:
+0.083679	['shop_score_delivery', 'shop_score_description', 'shop_review_positive_rate', 'shop_star_level', 'user_gender_id', 'shop_score_delivery-shop_star_level', 'shop_score_description-shop_review_positive_rate', 'shop_score_description*shop_review_positive_rate', 'shop_review_positive_rate+shop_star_level', 'shop_review_positive_rate-shop_star_level']

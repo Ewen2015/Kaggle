@@ -1,0 +1,56 @@
+Work Flow
+
+1. Adclick.py to process data
+2. BayesianSM.py and Conversion.py to do Bayesian Smoothing to take the 'is_trade' variable into consideration.
+3. PageRank.py to calculate pagerank of user-item network.
+4. Property.py to deal with nature language process on 'item_category_list', 'item_property_list', 'predict_category_property'.
+5. FeatureSelection.py and LRS_SA_RGSS.py to do feature selectiong.
+6. Stacking.py to consider model stacking. The code is not complete.
+
+Ctrl z后再bg
+
+ssh -P 28245  wang@198.35.44.43
+scp -P 28245  wang@198.35.44.43:~/mat_* /Users/ewenwang/Documents/practice_data/conversion_rate/
+
+ssh peter@40.125.174.44
+RDFRkAjWGmNU
+
+/Users/ewenwang/Documents/GitHub/Kaggle/conversion_rate/round2/
+peter@40.125.174.44:/mnt/resource/tm/code/
+
+scp peter@40.125.174.44:~/mat_train_day7.csv /Users/ewenwang/Documents/practice_data/conversion_rate/
+
+scp peter@40.125.174.44:/mnt/resource/tm/round2_peter_train.txt /Users/ewenwang/Documents/practice_data/conversion_rate/
+scp peter@40.125.174.44:/mnt/resource/tm/round2_peter_test.txt /Users/ewenwang/Documents/practice_data/conversion_rate/
+
+scp peter@40.125.174.44:/mnt/resource/tm/tmp-train.txt /Users/ewenwang/Documents/practice_data/conversion_rate/
+
+scp peter@40.125.174.44:~/profile_user.csv /Users/ewenwang/Documents/practice_data/conversion_rate/
+
+peter@40.125.174.44:/mnt/resource/tm/code/
+
+echo 'instance_id	tmatch_cat_ct	match_prop_ct' > train-match-7.txt
+at train-match.txt | awk '{if($(NF-3)=='7') {print $1,$(NF-1),$NF}}' >> train-match-7.txt
+
+echo 'instance_id	match_cat_ct	match_prop_ct' > test-match.txt
+
+at test-match.txt | {print $1,$(NF-1),$NF}' >> round2_match_test.txt
+
+[
+'item_id', 'item_city_id', 'item_price_level', 'item_sales_level', 'item_collected_level', 'item_pv_level', 
+
+'user_gender_id', 'user_age_level', 'user_star_level', 
+'context_page_id', 
+'shop_review_num_level', 'shop_review_positive_rate', 'shop_score_service', 'shop_score_delivery',
+'context_hour', 
+
+'shop_id_cnt',
+
+'user_id_item_id_cnt',
+'shop_id_user_id_prob', 'shop_id_item_id_cnt', 'shop_id_item_collected_level_prob', 'shop_id_item_brand_id_prob',
+'context_page_id_user_id_prob', 'hour_user_id_prob', 
+
+'user_pagerank']
+
+
+'item_brand_id', 'item_city_id', 'item_price_level', 'item_sales_level', 'item_collected_level', 'item_pv_level', 'user_gender_id', 'user_age_level', 'user_occupation_id', 'user_star_level', 'shop_review_num_level', 'shop_review_positive_rate', 'shop_star_level', 'shop_score_service', 'shop_score_delivery', 'shop_score_description', 'match_cat_ct', 'match_prop_ct', 'wt_item_pv_level', 'wt_item_city_id', 'wt_item_category_list', 'wt_shop_review_num_level', 'wt_match_cat_ct', 'wt_item_collected_level', 'wt_item_brand_id', 'wt_item_sales_level', 'wt_context_page_id', 'wt_match_prop_ct', 'wt_shop_id', 'wt_shop_star_level', 'wt_item_id', 'wt_item_price_level', 'list_wt_item_property_list', 'list_wt_item_category_list', 'item_pv_level_item_city_id_wt', 'item_pv_level_item_brand_id_wt', 'item_pv_level_match_cat_ct_wt', 'item_pv_level_user_occupation_id_wt', 'item_pv_level_item_collected_level_wt', 'item_pv_level_item_sales_level_wt', 'item_pv_level_context_page_id_wt', 'item_pv_level_match_prop_ct_wt', 'item_pv_level_shop_id_wt', 'item_pv_level_shop_star_level_wt', 'item_pv_level_shop_review_num_level_wt', 'item_pv_level_item_category_list_wt', 'item_pv_level_item_price_level_wt', 'item_city_id_item_brand_id_wt', 'item_city_id_match_cat_ct_wt', 'item_city_id_item_collected_level_wt', 'item_city_id_item_sales_level_wt', 'item_city_id_context_page_id_wt', 'item_city_id_match_prop_ct_wt', 'item_city_id_shop_id_wt', 'item_city_id_user_age_level_wt', 'item_city_id_shop_star_level_wt', 'item_city_id_shop_review_num_level_wt', 'item_city_id_item_category_list_wt', 'item_city_id_item_price_level_wt', 'item_brand_id_match_cat_ct_wt', 'item_brand_id_user_occupation_id_wt', 'item_brand_id_item_collected_level_wt', 'item_brand_id_item_sales_level_wt', 'item_brand_id_context_page_id_wt', 'item_brand_id_match_prop_ct_wt', 'item_brand_id_shop_id_wt', 'item_brand_id_user_age_level_wt', 'item_brand_id_shop_star_level_wt', 'item_brand_id_shop_review_num_level_wt', 'item_brand_id_item_category_list_wt', 'item_brand_id_item_price_level_wt', 'match_cat_ct_item_collected_level_wt', 'match_cat_ct_item_sales_level_wt', 'match_cat_ct_context_page_id_wt', 'match_cat_ct_match_prop_ct_wt', 'match_cat_ct_shop_id_wt', 'match_cat_ct_user_age_level_wt', 'match_cat_ct_shop_star_level_wt', 'match_cat_ct_shop_review_num_level_wt', 'match_cat_ct_item_category_list_wt', 'match_cat_ct_item_price_level_wt', 'item_collected_level_item_sales_level_wt', 'item_collected_level_context_page_id_wt', 'item_collected_level_match_prop_ct_wt', 'item_collected_level_shop_id_wt', 'item_collected_level_shop_star_level_wt', 'item_collected_level_shop_review_num_level_wt', 'item_collected_level_item_category_list_wt', 'item_collected_level_item_price_level_wt', 'item_sales_level_context_page_id_wt', 'item_sales_level_match_prop_ct_wt', 'item_sales_level_shop_id_wt', 'item_sales_level_shop_star_level_wt', 'item_sales_level_shop_review_num_level_wt', 'item_sales_level_item_category_list_wt', 'item_sales_level_user_gender_id_wt', 'item_sales_level_item_price_level_wt', 'context_page_id_match_prop_ct_wt', 'context_page_id_shop_id_wt', 'context_page_id_user_age_level_wt', 'context_page_id_shop_star_level_wt', 'context_page_id_shop_review_num_level_wt', 'context_page_id_item_category_list_wt', 'context_page_id_item_price_level_wt', 'match_prop_ct_shop_id_wt', 'match_prop_ct_shop_star_level_wt', 'match_prop_ct_shop_review_num_level_wt', 'match_prop_ct_item_category_list_wt', 'match_prop_ct_item_price_level_wt', 'shop_id_shop_star_level_wt', 'shop_id_shop_review_num_level_wt', 'shop_id_item_category_list_wt', 'shop_id_item_price_level_wt', 'shop_star_level_shop_review_num_level_wt', 'shop_star_level_item_category_list_wt', 'shop_star_level_item_price_level_wt', 'shop_review_num_level_item_category_list_wt', 'shop_review_num_level_user_gender_id_wt', 'shop_review_num_level_item_price_level_wt', 'item_category_list_item_price_level_wt'

@@ -135,6 +135,122 @@ class Data(object):
 
 
 
+
+# Set params
+# Scores ~0.784 (without tuning and early stopping)    
+params = {'boosting_type': 'gbdt',
+          'max_depth' : -1,
+          'objective': 'binary', 
+          'nthread': 5, # Updated from nthread
+          'num_leaves': 64, 
+          'learning_rate': 0.05, 
+          'max_bin': 512, 
+          'subsample_for_bin': 200,
+          'subsample': 1, 
+          'subsample_freq': 1, 
+          'colsample_bytree': 0.8, 
+          'reg_alpha': 5, 
+          'reg_lambda': 10,
+          'min_split_gain': 0.5, 
+          'min_child_weight': 1, 
+          'min_child_samples': 5, 
+          'scale_pos_weight': 1,
+          'num_class' : 1,
+          'metric' : 'binary_error'}
+
+# Create parameters to search
+gridParams = {
+    'learning_rate': [0.005],
+    'n_estimators': [8,16,24],
+    'num_leaves': [6,8,12,16],
+    'boosting_type' : ['gbdt'],
+    'objective' : ['binary'],
+    'random_state' : [501], # Updated from 'seed'
+    'colsample_bytree' : [0.64, 0.65, 0.66],
+    'subsample' : [0.7,0.75],
+    'reg_alpha' : [1,1.2],
+    'reg_lambda' : [1,1.2,1.4],
+    }
+
+# Create classifier to use. Note that parameters have to be input manually
+# not as a dict!
+mdl = lgb.LGBMClassifier(boosting_type= 'gbdt', 
+          objective = 'binary', 
+          n_jobs = 5, # Updated from 'nthread' 
+          silent = True,
+          max_depth = params['max_depth'],
+          max_bin = params['max_bin'], 
+          subsample_for_bin = params['subsample_for_bin'],
+          subsample = params['subsample'], 
+          subsample_freq = params['subsample_freq'], 
+          min_split_gain = params['min_split_gain'], 
+          min_child_weight = params['min_child_weight'], 
+          min_child_samples = params['min_child_samples'], 
+          scale_pos_weight = params['scale_pos_weight'])
+
+# To view the default model params:
+mdl.get_params().keys()
+
+# Create the grid
+grid = GridSearchCV(mdl, gridParams, verbose=1, cv=4, n_jobs=-1)
+
+# Run the grid
+grid.fit(allTrainData, allTrainLabels)
+
+# Print the best parameters found
+print(grid.best_params_)
+print(grid.best_score_)
+
+# Using parameters already set above, replace in the best from the grid search
+params['colsample_bytree'] = grid.best_params_['colsample_bytree']
+params['learning_rate'] = grid.best_params_['learning_rate'] 
+# params['max_bin'] = grid.best_params_['max_bin']
+params['num_leaves'] = grid.best_params_['num_leaves']
+params['reg_alpha'] = grid.best_params_['reg_alpha']
+params['reg_lambda'] = grid.best_params_['reg_lambda']
+params['subsample'] = grid.best_params_['subsample']
+# params['subsample_for_bin'] = grid.best_params_['subsample_for_bin']
+
+print('Fitting with params: ')
+print(params)
+
+# Kit k models with early-stopping on different training/validation splits
+k = 12;
+predsValid = 0 
+predsTrain = 0
+predsTest = 0
+for i in range(0, k): 
+    print('Fitting model', k)
+    
+    # Prepare the data set for fold
+    trainData, validData = train_test_split(train, test_size=0.4, stratify=train.Survived)
+    trainDataL, trainLabels, trainIDs, trainData = prepLGB(trainData, 
+                                                     classCol = 'Survived', 
+                                                     IDCol = 'PassengerId',
+                                                     fDrop = fDrop)
+    validDataL, validLabels, validIDs, validData = prepLGB(validData, 
+                                                     classCol = 'Survived', 
+                                                     IDCol = 'PassengerId',
+                                                     fDrop = fDrop)
+    # Train     
+    gbm = lgb.train(params, 
+                    trainDataL, 
+                    100000, 
+                    valid_sets=[trainDataL, validDataL],
+                    early_stopping_rounds = 50,
+                    verbose_eval=4)
+
+    # Plot importance
+    lgb.plot_importance(gbm)
+    plt.show()
+    
+    # Predict
+    predsValid += gbm.predict(validData, num_iteration=gbm.best_iteration)/k
+    predsTrain += gbm.predict(trainData, num_iteration=gbm.best_iteration)/k
+    predsTest += gbm.predict(testData, num_iteration=gbm.best_iteration)/k
+
+
+
 if __name__ == '__main__':
     pass
 

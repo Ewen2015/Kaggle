@@ -1,0 +1,332 @@
+vecstack log [2018.07.05].[17.36.02].556863.5cc9e3
+
+task:         [classification]
+n_classes:    [2]
+metric:       [log_loss]
+mode:         [oof_pred]
+n_models:     [11]
+
+----------------------------------------
+model  0:     [LogisticRegression]
+----------------------------------------
+
+C                 1.0
+class_weight      None
+dual              False
+fit_intercept     True
+intercept_scaling 1
+max_iter          100
+multi_class       ovr
+n_jobs            1
+penalty           l2
+random_state      0
+solver            liblinear
+tol               0.0001
+verbose           0
+warm_start        False
+
+    fold  0:  [0.22192359]
+    fold  1:  [0.22532688]
+    fold  2:  [0.22437512]
+    fold  3:  [0.22569005]
+    fold  4:  [0.22342525]
+    ----
+    MEAN:     [0.22414818] + [0.00136306]
+    FULL:     [0.22414816]
+
+----------------------------------------
+model  1:     [LinearDiscriminantAnalysis]
+----------------------------------------
+
+n_components     None
+priors           None
+shrinkage        None
+solver           svd
+store_covariance False
+tol              0.0001
+
+    fold  0:  [0.22720011]
+    fold  1:  [0.23830994]
+    fold  2:  [0.23507078]
+    fold  3:  [0.23453772]
+    fold  4:  [0.23284526]
+    ----
+    MEAN:     [0.23359276] + [0.00365387]
+    FULL:     [0.23359275]
+
+----------------------------------------
+model  2:     [KNeighborsClassifier]
+----------------------------------------
+
+algorithm     auto
+leaf_size     30
+metric        minkowski
+metric_params None
+n_jobs        1
+n_neighbors   5
+p             2
+weights       uniform
+
+    fold  0:  [1.20303248]
+    fold  1:  [1.19666186]
+    fold  2:  [1.22036443]
+    fold  3:  [1.18577328]
+    fold  4:  [1.23687060]
+    ----
+    MEAN:     [1.20854053] + [0.01806758]
+    FULL:     [1.20854034]
+
+----------------------------------------
+model  3:     [GaussianNB]
+----------------------------------------
+
+priors None
+
+    fold  0:  [0.36935644]
+    fold  1:  [0.37060256]
+    fold  2:  [0.38535982]
+    fold  3:  [0.38274733]
+    fold  4:  [0.37918343]
+    ----
+    MEAN:     [0.37744992] + [0.00641911]
+    FULL:     [0.37744973]
+
+----------------------------------------
+model  4:     [DecisionTreeClassifier]
+----------------------------------------
+
+class_weight             None
+criterion                gini
+max_depth                None
+max_features             None
+max_leaf_nodes           None
+min_impurity_decrease    0.0
+min_impurity_split       None
+min_samples_leaf         1
+min_samples_split        2
+min_weight_fraction_leaf 0.0
+presort                  False
+random_state             0
+splitter                 best
+
+    fold  0:  [3.48717909]
+    fold  1:  [3.50023923]
+    fold  2:  [3.57532440]
+    fold  3:  [3.62569763]
+    fold  4:  [3.55810199]
+    ----
+    MEAN:     [3.54930847] + [0.05070958]
+    FULL:     [3.54930683]
+
+----------------------------------------
+model  5:     [BaggingClassifier]
+----------------------------------------
+
+base_estimator                           DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, presort=False, random_state=0,
+            splitter='best')
+base_estimator__class_weight             None
+base_estimator__criterion                gini
+base_estimator__max_depth                None
+base_estimator__max_features             None
+base_estimator__max_leaf_nodes           None
+base_estimator__min_impurity_decrease    0.0
+base_estimator__min_impurity_split       None
+base_estimator__min_samples_leaf         1
+base_estimator__min_samples_split        2
+base_estimator__min_weight_fraction_leaf 0.0
+base_estimator__presort                  False
+base_estimator__random_state             0
+base_estimator__splitter                 best
+bootstrap                                True
+bootstrap_features                       False
+max_features                             1.0
+max_samples                              1.0
+n_estimators                             10
+n_jobs                                   -1
+oob_score                                True
+random_state                             0
+verbose                                  0
+warm_start                               False
+
+    fold  0:  [0.71552580]
+    fold  1:  [0.68880123]
+    fold  2:  [0.67854575]
+    fold  3:  [0.70100720]
+    fold  4:  [0.71994243]
+    ----
+    MEAN:     [0.70076448] + [0.01563676]
+    FULL:     [0.70076434]
+
+----------------------------------------
+model  6:     [RandomForestClassifier]
+----------------------------------------
+
+bootstrap                True
+class_weight             None
+criterion                gini
+max_depth                None
+max_features             auto
+max_leaf_nodes           None
+min_impurity_decrease    0.0
+min_impurity_split       None
+min_samples_leaf         1
+min_samples_split        2
+min_weight_fraction_leaf 0.0
+n_estimators             10
+n_jobs                   -1
+oob_score                False
+random_state             0
+verbose                  0
+warm_start               False
+
+    fold  0:  [0.70123406]
+    fold  1:  [0.71156483]
+    fold  2:  [0.70015227]
+    fold  3:  [0.70210840]
+    fold  4:  [0.69543446]
+    ----
+    MEAN:     [0.70209880] + [0.00526414]
+    FULL:     [0.70209893]
+
+----------------------------------------
+model  7:     [ExtraTreesClassifier]
+----------------------------------------
+
+bootstrap                False
+class_weight             None
+criterion                gini
+max_depth                None
+max_features             auto
+max_leaf_nodes           None
+min_impurity_decrease    0.0
+min_impurity_split       None
+min_samples_leaf         1
+min_samples_split        2
+min_weight_fraction_leaf 0.0
+n_estimators             10
+n_jobs                   -1
+oob_score                False
+random_state             0
+verbose                  0
+warm_start               False
+
+    fold  0:  [0.77054426]
+    fold  1:  [0.79246659]
+    fold  2:  [0.76820478]
+    fold  3:  [0.80047099]
+    fold  4:  [0.81239485]
+    ----
+    MEAN:     [0.78881630] + [0.01711027]
+    FULL:     [0.78881588]
+
+----------------------------------------
+model  8:     [AdaBoostClassifier]
+----------------------------------------
+
+algorithm                                SAMME.R
+base_estimator                           DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, presort=False, random_state=0,
+            splitter='best')
+base_estimator__class_weight             None
+base_estimator__criterion                gini
+base_estimator__max_depth                None
+base_estimator__max_features             None
+base_estimator__max_leaf_nodes           None
+base_estimator__min_impurity_decrease    0.0
+base_estimator__min_impurity_split       None
+base_estimator__min_samples_leaf         1
+base_estimator__min_samples_split        2
+base_estimator__min_weight_fraction_leaf 0.0
+base_estimator__presort                  False
+base_estimator__random_state             0
+base_estimator__splitter                 best
+learning_rate                            1.0
+n_estimators                             50
+random_state                             0
+
+    fold  0:  [0.27747123]
+    fold  1:  [0.27666649]
+    fold  2:  [0.31778290]
+    fold  3:  [0.31892741]
+    fold  4:  [0.29137737]
+    ----
+    MEAN:     [0.29644508] + [0.01864210]
+    FULL:     [0.29644461]
+
+----------------------------------------
+model  9:     [GradientBoostingClassifier]
+----------------------------------------
+
+criterion                friedman_mse
+init                     None
+learning_rate            0.1
+loss                     deviance
+max_depth                3
+max_features             None
+max_leaf_nodes           None
+min_impurity_decrease    0.0
+min_impurity_split       None
+min_samples_leaf         1
+min_samples_split        2
+min_weight_fraction_leaf 0.0
+n_estimators             100
+presort                  auto
+random_state             0
+subsample                1.0
+verbose                  0
+warm_start               False
+
+    fold  0:  [0.17877062]
+    fold  1:  [0.17814629]
+    fold  2:  [0.17350590]
+    fold  3:  [0.17676743]
+    fold  4:  [0.17888487]
+    ----
+    MEAN:     [0.17721502] + [0.00200167]
+    FULL:     [0.17721503]
+
+----------------------------------------
+model 10:     [MLPClassifier]
+----------------------------------------
+
+activation          relu
+alpha               0.0001
+batch_size          auto
+beta_1              0.9
+beta_2              0.999
+early_stopping      False
+epsilon             1e-08
+hidden_layer_sizes  (100,)
+learning_rate       constant
+learning_rate_init  0.001
+max_iter            200
+momentum            0.9
+nesterovs_momentum  True
+power_t             0.5
+random_state        0
+shuffle             True
+solver              adam
+tol                 0.0001
+validation_fraction 0.1
+verbose             False
+warm_start          False
+
+    fold  0:  [0.18789622]
+    fold  1:  [0.18754208]
+    fold  2:  [0.18325074]
+    fold  3:  [0.18586845]
+    fold  4:  [0.18798653]
+    ----
+    MEAN:     [0.18650880] + [0.00180007]
+    FULL:     [0.18650882]
+
+----------------------------------------
+END
+----------------------------------------

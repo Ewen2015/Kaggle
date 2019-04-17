@@ -41,6 +41,7 @@ def Preprocess(data):
     # context
     for i in range(5):
         data['predict_category_property_' + str(i)] = LabelEncoder.fit_transform(data['predict_category_property'].map(lambda x: str(str(x).split(';')[i]) if len(str(x).split(';')) > i else ''))
+    
     data['realtime'] = data['context_timestamp'].apply(timestamp_datetime)
     data['realtime'] = pd.to_datetime(data['realtime'])
     data['day'] = data['realtime'].dt.day

@@ -1,8 +1,0 @@
-{
-    "dir_data": "/Users/ewenwang/Documents/tencent19/testA/",
-    "file_ad_op": "ad_operation.dat",
-    "file_ad_sf": "ad_static_feature.out",
-    "file_user": "user_data",
-    "file_log": "totalExposureLog.out",
-    "file_ts_sm": "test_sample.dat"
-}
